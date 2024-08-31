@@ -1,0 +1,5 @@
+Milwaukee 10.99 2001 regular
+Estwing 29.99 2002 regular
+Stanley 19.99 2003 regular
+Craftsman 12.24 2004 regular
+Pittsburgh 16.88 2005 regular
