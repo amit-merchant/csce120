@@ -20,7 +20,7 @@ int main(){
     }
     int max_cities = i;
     cout << max_cities;
-    for (; ; i--) {
+    for (; ; i--) { // TODO define correct loop variables
         // TODO write onto output stream from smallTowns[i]
     }
 }
