@@ -9,7 +9,7 @@ int main(){
 
     unsigned int Numbers[SIZE];
     for (int i = 0; i < SIZE; ++i) {
-        // TODO use the stream handler to read into the array 
+        // TODO use the stream handler to read into the array Numbers[i]
     }
 
     int largest_number = 0;
