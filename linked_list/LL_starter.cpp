@@ -27,6 +27,7 @@ class node {
         // copy assigntment constructor
         node& operator=(const node& object) {
         // TO DO
+        return *this;
         }
 };
 
