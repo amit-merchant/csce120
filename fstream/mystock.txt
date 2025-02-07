@@ -1,0 +1,5 @@
+101 hammer 9.99 25
+102 wrench 7.99 18
+103 drill 49.95 4
+104 chisel 5.98 12
+105 handsaw 12.98 7
