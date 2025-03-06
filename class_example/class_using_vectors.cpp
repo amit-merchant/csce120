@@ -35,33 +35,80 @@ class item{
             }
             return *this;
         }
-        void addtoVec (vector<item> &list_of_items, string str) { //setter
-            item tmp;
-            istringstream iss (str);
-            while (iss >> tmp.id >> tmp.name >> tmp.price >> tmp.qtyInStock) {
-                list_of_items.push_back(tmp);      
+};
+
+// we create a class of vector if items because the original class of items
+// cannot take the vector and some operations are best done on the vector
+// especially search and modify
+class vector_of_items { // class of vector of items
+    public:
+        vector<item> v_of_items;
+    public:
+        vector_of_items () {}
+        ~vector_of_items () {} //destructor
+        vector_of_items (const vector_of_items& object) { //copy constructor
+            this->v_of_items = object.v_of_items;
+        }
+        vector_of_items& operator=(const vector_of_items& object) { //assignment constructor
+            if (this != &object) { // Avoid self-assignment
+                this->v_of_items = object.v_of_items;
             }
+            return *this;
+        }
+        vector_of_items operator+(const item& object) { // adds new item to inventory
+            vector_of_items result = *this;
+            result.v_of_items.push_back(object);
+            return result;
+        }
+        vector_of_items operator-(const item& object) { // decrements quantity by 1 
+            vector_of_items result = *this;
+            for (auto i = 0; i < result.v_of_items.size(); i++) {
+                if (result.v_of_items[i].name == object.name) {
+                    if (result.v_of_items[i].qtyInStock > 0) {
+                        result.v_of_items[i].qtyInStock--;
+                    }
+                }
+            }
+            return result;           
         }
 };
 
+
 int main () {
-    vector<item> list_of_items;
+    vector_of_items list_of_items;
     item tmp;
     // this code reads the txt into a vector
     ifstream ifs ("myStock.txt");
     while (ifs >> tmp.id >> tmp.name >> tmp.price >> tmp.qtyInStock) {
-        list_of_items.push_back(tmp);      
+        list_of_items = list_of_items + tmp;      
+    }
+    cout << "Original Inventory: " << endl;
+    for (auto i : list_of_items.v_of_items) {
+        cout << i.id << " " << i.name << " " << i.price << " " << i.qtyInStock << endl;
     }
     // this create a deepcopy    
-    vector<item> backup_copy(list_of_items);
+    vector<item> backup_copy(list_of_items.v_of_items);
     string line;
     item temp;
     while (getline(cin, line)) {
         if (line == "q") {break;}
-        temp.addtoVec(list_of_items, line);
+        string str;
+        item tmp;
+        istringstream iss (line);
+        while (iss >> str ) {
+            if (str == "add") { 
+                iss >> tmp.id >> tmp.name >> tmp.price >> tmp.qtyInStock;
+                list_of_items = list_of_items + tmp;
+            } // adds a new item to existing list
+            if (str == "dec") { 
+                iss >> tmp.name;
+                list_of_items = list_of_items - tmp;
+            } // decreases quantity by one, requires a partially populated object
+        }
     }
-    for (auto i : list_of_items) {
+    cout << "Inventory after transactions: " << endl;
+    for (auto i : list_of_items.v_of_items) {
         cout << i.id << " " << i.name << " " << i.price << " " << i.qtyInStock << endl;
     }
-    cout << "backup copy size: " << backup_copy.size() << endl;
+    // cout << "backup copy size: " << backup_copy.size() << endl;
 }
