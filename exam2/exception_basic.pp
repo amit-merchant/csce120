@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#this file has the basic try-catch structure
 using std::cout, std::exception, std::invalid_argument, std::endl;
 void exceptionThrower(){
     try {
@@ -12,4 +13,5 @@ int main() {
         exceptionThrower(); }
     catch(...){
         cout << "Caught in main" << endl; } 
+
 }
