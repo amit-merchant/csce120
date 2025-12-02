@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+#include <stdexcept>
+using std::vector, std::cout;
+
+// Build the initial 2D vector
+vector<vector<int>> buildRows(const vector<int>& input) {
+    vector<vector<int>> result;
+    for (int k=0; k<input.size(); k++) {
+        if (input.at(k) < 0) {
+            throw std::invalid_argument("invalid argument in input vector");
+        }
+        vector<int> row(input.at(k), input.at(k));  // row of length k, all values are k
+        result.push_back(row);
+    }
+    return result;
+}
+
+// For each row, append the sum of its elements to the end.
+void padRowsWithSum(vector<vector<int>>& v) {
+    for (auto& row : v) {
+        int sum = 0;
+        for (int i : row) {
+            sum += i;
+        }
+        row.push_back(sum);
+    }
+}
+
+// Utility to print a 2D vector
+void print2D(const vector<vector<int>>& v) {
+    for (const auto& row : v) {
+        for (const int x : row) {
+            std::cout << x << " ";
+        }
+        std::cout << "\n";
+    }
+}
+
+int main() {
+    // Example input
+    vector<int> input = {2, 3, 4};
+
+    // Step 1: Build the rows
+    vector<vector<int>> v = buildRows(input);
+    // Step 2: Pad each row with its sum
+    padRowsWithSum(v);
+    print2D(v);
+
+    return 0;
+}
