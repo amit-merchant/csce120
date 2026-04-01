@@ -1,0 +1,9 @@
+101 hammer 9.99
+102 wrench 7.99
+103 drill 49.95
+104 tape 2.49
+105 hacksaw 6.49
+106 level 1.99
+107 paint 17.99
+108 brush 4.99
+109 ladder 39.99
